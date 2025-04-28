@@ -20,16 +20,10 @@ protected:
 	virtual void BeginPlay() override;
 
 public:	
-	// Setter and Getter.
-	template<typename T>
-	T AddValue(T Value1, T Value2);
+
 
 private:
-	
+	// Components
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<UStaticMeshComponent> MeshComp;
 };
-
-template<typename T>
-inline T AItem::AddValue(T Value1, T Value2)
-{
-	return Value1 + Value2;
-}
