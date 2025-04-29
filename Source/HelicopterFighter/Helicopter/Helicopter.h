@@ -44,12 +44,24 @@ private:
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	TObjectPtr<UInputAction> IA_MoveForward;
+	
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	TObjectPtr<UInputAction> IA_MoveRight;
+	
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	TObjectPtr<UInputAction> IA_MoveUp;
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float HelicopterMovementSpeed = 500.f;
 
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float HelicopterMovementRightValue = 300.f;
+
+
 	// Movement Functions
 	void MoveForward(const FInputActionValue& InputActionValue);
+	void MoveRight(const FInputActionValue& InputActionValue);
+	void MoveUp(const FInputActionValue& InputActionValue);
 
 public:	
 

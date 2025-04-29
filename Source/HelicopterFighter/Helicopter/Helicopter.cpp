@@ -55,6 +55,8 @@ void AHelicopter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 	if (UEnhancedInputComponent* EnhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		EnhancedInput->BindAction(IA_MoveForward, ETriggerEvent::Triggered, this, &AHelicopter::MoveForward);
+		EnhancedInput->BindAction(IA_MoveUp, ETriggerEvent::Triggered, this, &AHelicopter::MoveUp);
+		EnhancedInput->BindAction(IA_MoveRight, ETriggerEvent::Triggered, this, &AHelicopter::MoveRight);
 	}
 
 }
@@ -69,4 +71,24 @@ void AHelicopter::MoveForward(const FInputActionValue& InputActionValue)
 		AddActorLocalOffset(FVector(Speed, 0.f, 0.f));
 	}
 	
+}
+
+void AHelicopter::MoveUp(const FInputActionValue& InputActionValue)
+{
+	const float InputAxisValue = InputActionValue.Get<float>();
+	if (UWorld* World = GetWorld())
+	{
+		float Speed = HelicopterMovementSpeed * InputAxisValue * World->GetDeltaSeconds();
+		AddActorLocalOffset(FVector(0.f, 0.f, Speed));
+	}
+}
+
+void AHelicopter::MoveRight(const FInputActionValue& InputActionValue)
+{
+	const float InputAxisValue = InputActionValue.Get<float>();
+	if (UWorld* World = GetWorld())
+	{
+		float Speed = HelicopterMovementRightValue * InputAxisValue * World->GetDeltaSeconds();
+		AddActorLocalOffset(FVector(0.f, Speed, 0.f));
+	}
 }
