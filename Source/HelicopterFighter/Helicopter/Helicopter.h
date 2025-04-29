@@ -20,11 +20,11 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-public:	
-	// Setters and Getters
-
 private:
 	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<UStaticMeshComponent> MeshComp;
+	TObjectPtr<UStaticMeshComponent> HelicopterMesh;
+
+public:	
+	// Setters and Getters
 
 };
