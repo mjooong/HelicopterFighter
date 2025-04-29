@@ -4,6 +4,7 @@
 #include "Helicopter.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "InputMappingContext.h"
 
 AHelicopter::AHelicopter()
 {
@@ -21,7 +22,6 @@ AHelicopter::AHelicopter()
 
 	HelicopterCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("HelicopterCamera"));
 	HelicopterCamera->SetupAttachment(HelicopterSpringArm);
-	//HelicopterCamera->SetRelativeRotation(FRotator(-30.f, 0.f, 0.f));
 	HelicopterCamera->FieldOfView = 100.f;
 }
 

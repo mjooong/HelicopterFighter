@@ -9,6 +9,7 @@
 // Forward Declare
 class USpringArmComponent;
 class UCameraComponent;
+class UInputMappingContext;
 
 UCLASS()
 class HELICOPTERFIGHTER_API AHelicopter : public APawn
@@ -34,8 +35,9 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Helicopter")
 	TObjectPtr<UCameraComponent> HelicopterCamera;
 
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	TObjectPtr<UInputMappingContext> IMC_HelicopterMovement;
 
 public:	
-	// Setters and Getters
 
 };
