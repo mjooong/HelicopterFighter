@@ -6,6 +6,10 @@
 #include "GameFramework/Pawn.h"
 #include "Helicopter.generated.h"
 
+// Forward Declare
+class USpringArmComponent;
+class UCameraComponent;
+
 UCLASS()
 class HELICOPTERFIGHTER_API AHelicopter : public APawn
 {
@@ -21,8 +25,15 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, Category = "Helicopter")
 	TObjectPtr<UStaticMeshComponent> HelicopterMesh;
+
+	UPROPERTY(VisibleAnywhere, Category = "Helicopter")
+	TObjectPtr<USpringArmComponent> HelicopterSpringArm;
+
+	UPROPERTY(VisibleAnywhere, Category = "Helicopter")
+	TObjectPtr<UCameraComponent> HelicopterCamera;
+
 
 public:	
 	// Setters and Getters

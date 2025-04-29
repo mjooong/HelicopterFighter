@@ -2,17 +2,27 @@
 
 
 #include "Helicopter.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "Camera/CameraComponent.h"
 
 AHelicopter::AHelicopter()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	HelicopterMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
+	HelicopterMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("HelicopterMesh"));
 	RootComponent = HelicopterMesh;
 
+	HelicopterSpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("HelicopterSpringArm"));
+	HelicopterSpringArm->SetupAttachment(HelicopterMesh);
+	HelicopterSpringArm->SetRelativeLocation(FVector(0.f, 0.f, 300.f));
+	HelicopterSpringArm->TargetArmLength = 1200.f;
+	HelicopterSpringArm->SocketOffset = FVector(0.f, 0.f, 400.f);
 
-
+	HelicopterCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("HelicopterCamera"));
+	HelicopterCamera->SetupAttachment(HelicopterSpringArm);
+	//HelicopterCamera->SetRelativeRotation(FRotator(-30.f, 0.f, 0.f));
+	HelicopterCamera->FieldOfView = 100.f;
 }
 
 void AHelicopter::BeginPlay()
