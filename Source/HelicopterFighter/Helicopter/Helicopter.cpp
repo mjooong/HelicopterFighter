@@ -5,6 +5,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "InputMappingContext.h"
+#include "EnhancedInputSubsystems.h"
 
 AHelicopter::AHelicopter()
 {
@@ -29,6 +30,13 @@ void AHelicopter::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+		{
+			Subsystem->AddMappingContext(IMC_HelicopterMovement, 0);
+		}
+	}
 }
 
 void AHelicopter::Tick(float DeltaTime)
