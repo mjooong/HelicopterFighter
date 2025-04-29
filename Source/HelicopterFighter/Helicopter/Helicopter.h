@@ -4,12 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
+#include "InputActionValue.h"
 #include "Helicopter.generated.h"
 
 // Forward Declare
 class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
+class UInputAction;
 
 UCLASS()
 class HELICOPTERFIGHTER_API AHelicopter : public APawn
@@ -26,6 +28,7 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
+	// Components
 	UPROPERTY(VisibleAnywhere, Category = "Helicopter")
 	TObjectPtr<UStaticMeshComponent> HelicopterMesh;
 
@@ -35,8 +38,18 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Helicopter")
 	TObjectPtr<UCameraComponent> HelicopterCamera;
 
+	// Movement
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	TObjectPtr<UInputMappingContext> IMC_HelicopterMovement;
+
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	TObjectPtr<UInputAction> IA_MoveForward;
+
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float HelicopterMovementSpeed = 500.f;
+
+	// Movement Functions
+	void MoveForward(const FInputActionValue& InputActionValue);
 
 public:	
 

@@ -6,6 +6,8 @@
 #include "Camera/CameraComponent.h"
 #include "InputMappingContext.h"
 #include "EnhancedInputSubsystems.h"
+#include "EnhancedInputComponent.h"
+#include "InputAction.h"
 
 AHelicopter::AHelicopter()
 {
@@ -50,5 +52,21 @@ void AHelicopter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 
+	if (UEnhancedInputComponent* EnhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent))
+	{
+		EnhancedInput->BindAction(IA_MoveForward, ETriggerEvent::Triggered, this, &AHelicopter::MoveForward);
+	}
+
 }
 
+void AHelicopter::MoveForward(const FInputActionValue& InputActionValue)
+{
+	const float InputAxisValue = InputActionValue.Get<float>();
+
+	if (UWorld* World = GetWorld())
+	{
+		float Speed = HelicopterMovementSpeed * InputAxisValue * World->GetDeltaSeconds();
+		AddActorLocalOffset(FVector(Speed, 0.f, 0.f));
+	}
+	
+}
