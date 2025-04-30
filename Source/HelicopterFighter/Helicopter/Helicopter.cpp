@@ -57,6 +57,7 @@ void AHelicopter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponen
 		EnhancedInput->BindAction(IA_MoveForward, ETriggerEvent::Triggered, this, &AHelicopter::MoveForward);
 		EnhancedInput->BindAction(IA_MoveUp, ETriggerEvent::Triggered, this, &AHelicopter::MoveUp);
 		EnhancedInput->BindAction(IA_MoveRight, ETriggerEvent::Triggered, this, &AHelicopter::MoveRight);
+		EnhancedInput->BindAction(IA_LookAround, ETriggerEvent::Triggered, this, &AHelicopter::LookAround);
 	}
 
 }
@@ -91,4 +92,16 @@ void AHelicopter::MoveRight(const FInputActionValue& InputActionValue)
 		float Speed = HelicopterMovementRightValue * InputAxisValue * World->GetDeltaSeconds();
 		AddActorLocalOffset(FVector(0.f, Speed, 0.f));
 	}
+}
+
+void AHelicopter::LookAround(const FInputActionValue& InputActionValue)
+{
+	FVector2D LookAroundValue = InputActionValue.Get<FVector2D>();
+
+	if (UWorld* World = GetWorld())
+	{
+		AddControllerYawInput(LookAroundValue.X * TurnRate * World->GetDeltaSeconds());
+		AddControllerPitchInput(LookAroundValue.Y * TurnRate * World->GetDeltaSeconds());
+	}
+	
 }
