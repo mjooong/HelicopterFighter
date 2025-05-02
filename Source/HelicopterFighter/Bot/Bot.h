@@ -6,6 +6,8 @@
 #include "GameFramework/Actor.h"
 #include "Bot.generated.h"
 
+class AHelicopter;
+
 UCLASS()
 class HELICOPTERFIGHTER_API ABot : public AActor
 {
@@ -23,7 +25,9 @@ public:
 
 private:
 	// Components
-	UPROPERTY(EditAnywhere)
+	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UStaticMeshComponent> BotMesh;
 
+	UPROPERTY(EditAnywhere)
+	TObjectPtr<AHelicopter> TargetHelicopter;
 };

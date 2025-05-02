@@ -2,6 +2,7 @@
 
 
 #include "Bot.h"
+#include "HelicopterFighter/Helicopter/Helicopter.h"
 
 // Sets default values
 ABot::ABot()
@@ -18,12 +19,14 @@ ABot::ABot()
 void ABot::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
 }
 
 void ABot::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	SetActorLocation(TargetHelicopter->GetActorLocation());
 
 }
 
